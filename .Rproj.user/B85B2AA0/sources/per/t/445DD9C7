@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1618368047882.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3871977257",
+    "id" : "445DD9C7",
+    "lastKnownWriteTime" : 1618368067,
+    "last_content_update" : 1618368067417,
+    "path" : "C:/Users/KKari/Dropbox/Data_Science/Ellen/Charts.Rmd",
+    "project_path" : "Charts.Rmd",
+    "properties" : {
+        "cursorPosition" : "73,0",
+        "scrollLine" : "57",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

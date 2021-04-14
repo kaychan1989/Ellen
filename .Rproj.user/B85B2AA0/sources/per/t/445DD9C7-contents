@@ -1,0 +1,73 @@
+---
+title: "Charts"
+author: "Kay chansiri"
+date: "4/13/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+###Bar chart
+
+```{r}
+symptoms<-c("Swelling", "Redness", "Fever", "Nausea", "Muscle pain", "Tiredness", "Headache", "Injection site pain")
+percent<-c(0.06, 0.05, 0.03, 0.01, 0.18, 0.42, 0.35, 0.78)
+Prevalence<-c("Low", "Low","Low","Low","Moderate", "Moderate", "Moderate", "High")
+data<-tibble(symptoms, percent, Prevalence)
+data
+
+```
+
+
+```{r}
+data$symptoms<-factor(data$symptoms, levels = c("Swelling", "Redness", "Fever", "Nausea", "Muscle pain", "Tiredness", "Headache", "Injection site pain"))
+```
+
+
+
+```{r}
+ggplot(data, aes(symptoms))+ 
+  geom_bar(aes(y = ..percent..,fill = factor(..Prevalence..)), stat = "count")+ geom_text(aes(label = scales::percent(..percent.., accuracy = 1), 
+                y = ..percent..), stat = "count", vjust = -.5)+
+  labs(y = "Percent", fill = "Prevalence")+
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1.0))+
+  scale_fill_viridis_d(breaks =c("High", "Moderate", "Low"))+
+  theme_minimal()+
+  labs(title = "Pfizer vaccine: A minority of people experience most side effects \n (except for common pain at the injection site)", x = "Side effects")+
+  theme(text = element_text(size = 12), plot.title = element_text(face = "bold", hjust = 0.5, size = 12), legend.title = element_text(size = 10), axis.text.x = element_text(angle = 45, hjust = 0.7))
+
+
+
+```
+
+###Pie Chart
+
+```{r}
+value<-c(95, 5)
+group<-c("Effective", "Not effective")
+data<-tibble(group, value)
+data
+```
+
+
+
+```{r}
+bp<-ggplot(data, aes(x = "", y = value, fill = group))+
+  geom_bar(width = 1, stat = "identity")
+bp
+```
+
+```{r}
+library(scales)
+pie<-bp+coord_polar("y", start = 0)
+pie+scale_fill_manual(values = c("#CC6677", "#DDCC77"), name = "Pfizer effectiveness")+ theme_minimal()+
+  theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.title.y = element_blank(), plot.title = element_text(hjust = 0, vjust = -2))+
+  geom_text(aes(y = value/2+c(0, cumsum(value)[-length(value)]),
+                label = percent(value/100)), size = 4)+
+  labs(title = "Pfizer-BioNTech vaccine was 95% effective at preventing COVID-19", caption = "Pfizer worked equally well across age, gender, race, and ethnicity demographics")
+  
+  
+  
+```
